@@ -27,7 +27,7 @@ h2{font-size:clamp(1.8rem,3.4vw,2.5rem)}h3{font-size:1.3rem}p{margin:0 0 1em}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
 section{padding:76px 0}section.mist{background:var(--mist)}
 .lead{font-size:1.1rem;color:var(--ink2);max-width:60ch}
-.eyebrow{font-family:var(--serif);color:var(--soft);font-size:1.05rem;margin:0 0 .3em}
+.eyebrow{font-family:var(--serif);color:var(--red);font-size:1rem;margin:0 0 .3em;letter-spacing:.04em}.eyebrow::before{content:"";display:inline-block;width:26px;height:2px;background:var(--red);vertical-align:middle;margin-right:10px}
 :focus-visible{outline:3px solid var(--red);outline-offset:3px}
 /* nav */
 .nav{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--deep),var(--navy) 60%,#1f4d80);box-shadow:0 6px 24px rgba(15,42,74,.25)}
@@ -43,7 +43,8 @@ section{padding:76px 0}section.mist{background:var(--mist)}
 .nav .acts a:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
 .nav .acts svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .nav .acts .in svg{fill:currentColor;stroke:none}
-@media(max-width:900px){.nav ul{display:none}}
+.nav .burger{display:none;width:40px;height:40px;border:0;border-radius:10px;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:0}.nav .burger i{display:block;width:20px;height:2px;background:#fff;margin:4px auto;border-radius:2px;transition:transform .25s,opacity .25s}
+@media(max-width:900px){.nav ul{display:none;position:absolute;left:0;right:0;top:64px;background:var(--deep);flex-direction:column;gap:0;padding:8px 16px 14px;box-shadow:0 20px 40px rgba(0,0,0,.25)}.nav ul.open{display:flex}.nav li a{display:block;padding:12px 10px;font-size:1.05rem}.nav .burger{display:block}.nav.on .burger i:nth-child(1){transform:translateY(6px) rotate(45deg)}.nav.on .burger i:nth-child(2){opacity:0}.nav.on .burger i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}.nav .acts a{width:34px;height:34px}}
 /* hero */
 .hero{padding:64px 0 48px;background:linear-gradient(180deg,#fff 0%,#f3f6fa 100%)}
 .hero .grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
@@ -64,7 +65,7 @@ section{padding:76px 0}section.mist{background:var(--mist)}
 /* kpis */
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}
 .kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 18px 18px;position:relative;overflow:hidden;min-width:0;display:flex;flex-direction:column;justify-content:flex-start;gap:2px}
-.kpi::before{content:"";position:absolute;left:0;top:0;height:5px;width:100%;background:var(--navy)}
+.kpi{transition:transform .25s,box-shadow .25s}.kpi:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(15,42,74,.14)}.kpi::before{content:"";position:absolute;left:0;top:0;height:5px;width:100%;background:linear-gradient(90deg,var(--navy),var(--red))}
 .kpi b{font-family:var(--serif);font-size:clamp(1.6rem,2.3vw,2.3rem);line-height:1.05;color:var(--deep);letter-spacing:-.01em}
 .kpi span{display:block;margin-top:10px;font-weight:700;line-height:1.25}
 .kpi small{display:block;color:var(--ink2);font-size:.86rem;margin-top:4px}
@@ -100,7 +101,7 @@ section{padding:76px 0}section.mist{background:var(--mist)}
 .dl{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-weight:600;text-decoration:none;border:1.5px solid var(--navy);border-radius:8px;padding:9px 14px;color:var(--navy)}
 .dl:hover{background:var(--navy);color:#fff}
 .figs{display:grid;gap:14px}.figs figure{margin:0;background:var(--mist);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
-.figs img{width:100%;object-fit:cover;max-height:440px}.figs figcaption{font-size:.86rem;color:var(--ink2);padding:9px 12px}
+.figs figure{transition:transform .3s,box-shadow .3s}.figs figure:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(15,42,74,.14)}.figs img{width:100%;object-fit:cover;max-height:440px;transition:transform .5s}.figs figure:hover img{transform:scale(1.03)}.figs figcaption{font-size:.86rem;color:var(--ink2);padding:9px 12px}
 .figs .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.figs figure.hidden{display:none}
 @media(max-width:900px){.case .body{grid-template-columns:1fr}.case.flip .text{order:0}}
 /* skills */
@@ -169,8 +170,8 @@ footer{padding:22px 0;font-size:.84rem;color:var(--ink2)}
 <body>
 <nav class="nav" aria-label="Secciones"><div class="wrap">
 <a class="brand" href="#top"><i>VG</i>Víctor González</a>
-<ul><li><a href="#casos">Empresas</a></li><li><a href="#saber">Habilidades</a></li><li><a href="#mapa">Mapa</a></li><li><a href="#trayectoria">Trayectoria</a></li><li><a href="#hoy">Hoy</a></li><li><a href="#formacion">Formación</a></li></ul>
-<div class="acts"><a href="tel:+34657095455" title="Llamar" aria-label="Llamar al 657 095 455"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a><a href="mailto:vicmangomar@gmail.com" title="Escribir un correo" aria-label="Escribir a vicmangomar@gmail.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a><a class="in" href="https://www.linkedin.com/in/victor-gonzalez-martin-70221390/" target="_blank" rel="noopener" title="LinkedIn" aria-label="Perfil de LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12M7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a></div></div></nav>
+<ul id="menu"><li><a href="#casos">Empresas</a></li><li><a href="#saber">Habilidades</a></li><li><a href="#mapa">Mapa</a></li><li><a href="#trayectoria">Trayectoria</a></li><li><a href="#hoy">Hoy</a></li><li><a href="#formacion">Formación</a></li></ul>
+<div class="acts"><a href="tel:+34657095455" title="Llamar" aria-label="Llamar al 657 095 455"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></a><a href="mailto:vicmangomar@gmail.com" title="Escribir un correo" aria-label="Escribir a vicmangomar@gmail.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a><a class="in" href="https://www.linkedin.com/in/victor-gonzalez-martin-70221390/" target="_blank" rel="noopener" title="LinkedIn" aria-label="Perfil de LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12M7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0"/></svg></a><button class="burger" aria-label="Menú" aria-expanded="false"><i></i><i></i><i></i></button></div></div></nav>
 
 <header id="top" class="hero"><div class="wrap grid">
 <div>
@@ -215,7 +216,7 @@ footer{padding:22px 0;font-size:.84rem;color:var(--ink2)}
 <p class="who"><b>Con quién:</b> Programa Investigo (SEPE), Ayuntamiento de Madrid, ICEX, agencia Summa, Apple App Store y Google Play.</p>
 <a class="dl" href="docs/looplan-identidad-de-marca-summa.pdf" download>Identidad de marca Looplan, por Summa (PDF)</a>
 </div>
-<div class="figs"><figure><img src="img/looplan-app-capturas.jpg" alt="Capturas de la app Looplan" onerror="this.parentElement.classList.add('hidden')"><figcaption>Planes por intereses, chat de grupo y quedada en persona.</figcaption></figure><figure><img src="img/looplan-logo.png" alt="Logotipo de Looplan" onerror="this.parentElement.classList.add('hidden')"><figcaption>Marca renovada en 2024.</figcaption></figure></div>
+<div class="figs"><figure><img src="img/looplan-app-capturas.jpg" alt="La app Looplan en tres pantallas de móvil" onerror="this.parentElement.classList.add('hidden')"><figcaption>La app: planes por intereses, chat de grupo y quedada en persona.</figcaption></figure><div class="row"><figure><img src="img/looplan-posters.jpg" alt="Cartelería de Looplan" onerror="this.parentElement.classList.add('hidden')"><figcaption>Campaña exterior.</figcaption></figure><figure><img src="img/looplan-redes.jpg" alt="Publicaciones de Looplan en redes" onerror="this.parentElement.classList.add('hidden')"><figcaption>Piezas para redes sociales.</figcaption></figure></div><figure><img src="img/looplan-loop.jpg" alt="El loop, símbolo de la marca Looplan" onerror="this.parentElement.classList.add('hidden')"><figcaption>Identidad de marca por Summa, 2024.</figcaption></figure></div>
 </div></div></article>
 
 <article class="case flip" id="bellapilar"><div class="wrap">
@@ -231,25 +232,26 @@ footer{padding:22px 0;font-size:.84rem;color:var(--ink2)}
 </div>
 <div class="figs"><figure><img src="img/bellapilar-coleccion.jpg" alt="Colección de vinos Bella Pilar" onerror="this.parentElement.classList.add('hidden')" style="background:#fff;object-fit:contain;max-height:420px"><figcaption>La colección Bella Pilar. Cada vino lleva un rasgo de carácter: Pureza, Encanto, Carisma, Temple, Instinto, Coraje…</figcaption></figure>
 <div class="row"><figure><img src="img/bellapilar-instinto.jpg" alt="Bella Pilar Instinto" onerror="this.parentElement.classList.add('hidden')"><figcaption>Instinto, tempranillo y syrah.</figcaption></figure><figure><img src="img/bellapilar-coraje.jpg" alt="Bella Pilar Coraje" onerror="this.parentElement.classList.add('hidden')"><figcaption>Coraje, ecológico: nueve medallas.</figcaption></figure></div>
-<div class="row"><figure><img src="img/bellapilar-temple-medalla-plata-mezquita.jpg" alt="Temple con la medalla de plata de los Premios Mezquita 2020" onerror="this.parentElement.classList.add('hidden')"><figcaption>Temple, plata en los Premios Mezquita 2020.</figcaption></figure><figure><img src="img/bellapilar-medidor-de-momentos.jpg" alt="Contraetiqueta con el medidor de momentos" onerror="this.parentElement.classList.add('hidden')"><figcaption>El “medidor de momentos”.</figcaption></figure></div>
-<figure><img src="img/bellapilar-presentacion-el-corte-ingles-2020.jpg" alt="Presentación a El Corte Inglés, octubre de 2020" onerror="this.parentElement.classList.add('hidden')"><figcaption>Presentación a la central de compras de El Corte Inglés, octubre de 2020.</figcaption></figure></div>
+<figure><img src="img/bellapilar-medidor-de-momentos.jpg" alt="Contraetiqueta con el medidor de momentos" onerror="this.parentElement.classList.add('hidden')"><figcaption>El “medidor de momentos” de la contraetiqueta.</figcaption></figure>
+<div class="row"><figure><img src="img/bellapilar-expositor-condis.jpg" alt="Expositor de Bella Pilar en un supermercado Condis" onerror="this.parentElement.classList.add('hidden')"><figcaption>El expositor exclusivo de marca, en el lineal de Condis.</figcaption></figure><figure><img src="img/bellapilar-furgoneta.jpg" alt="Furgoneta rotulada de Bella Pilar" onerror="this.parentElement.classList.add('hidden')" style="height:100%"><figcaption>Reparto propio con vehículo rotulado.</figcaption></figure></div></div>
 </div></div></article>
 
 <article class="case" id="gomarmedia"><div class="wrap">
 <div class="head"><img class="logo" src="img/logo-gomarmedia.png" alt="" onerror="this.classList.add('hide')"><h3>GomarMedia</h3><span class="yr">2016 – 2018</span><span class="rl">Director de operaciones y comercial · Publicidad digital en escaparates</span></div>
 <div class="body"><div class="text"><dl class="sar">
 <div><dt>Situación</dt><dd>La publicidad exterior en Barcelona quedaba fuera del alcance del pequeño comercio por precio, contratos y producción.</dd></div>
-<div><dt>Acción</dt><dd><ul><li>Un medio propio con la lógica del vending: se localizaban los escaparates de mayor tránsito (Sagrada Família, bocas de metro, paradas de autobús), se alquilaba el espacio al comercio a cambio de un ingreso mensual y un anuncio gratuito, y se instalaba la pantalla de cara a la calle.</li><li>Cinco circuitos de diez pantallas profesionales Samsung; oferta a 30 € al mes por pantalla, spot cada treinta minutos y anuncio producido sin coste.</li><li>Acuerdo con MediaMarkt para suministro, instalación y software, con programación de contenidos en remoto: estructura mínima y foco en venta y contenidos.</li></ul></dd></div>
-<div class="r"><dt>Resultado</dt><dd><ul><li>Red de cincuenta pantallas en propiedad operativa en Barcelona.</li><li>Cartera de anunciantes locales con recurrencia mensual; varios contrataron la red completa.</li></ul></dd></div>
+<div><dt>Acción</dt><dd><ul><li>Un medio propio con la lógica del vending: se localizaban los escaparates de mayor tránsito (Sagrada Família, bocas de metro, paradas de autobús), se alquilaba el espacio al comercio a cambio de un ingreso mensual y un anuncio gratuito, y se instalaba la pantalla de cara a la calle.</li><li>Cinco circuitos de diez pantallas profesionales Samsung; tarifas desde 30 € al mes por circuito según franja horaria, spot cada treinta minutos y anuncio producido sin coste.</li><li>Acuerdo con MediaMarkt para suministro, instalación y software, con programación de contenidos en remoto: estructura mínima y foco en venta y contenidos.</li></ul></dd></div>
+<div class="r"><dt>Resultado</dt><dd><ul><li>Red de cincuenta pantallas en propiedad operativa en Barcelona.</li><li>Más de trescientos cincuenta anunciantes captados comercio a comercio, con recurrencia mensual; varios contrataron la red completa.</li></ul></dd></div>
 </dl>
-<div class="strip"><div><b>50</b><span>pantallas</span></div><div><b>+50</b><span>escaparates negociados</span></div><div><b>5</b><span>circuitos</span></div><div><b>30 €</b><span>al mes y pantalla</span></div></div>
+<div class="strip"><div><b>+350</b><span>anunciantes</span></div><div><b>50</b><span>pantallas</span></div><div><b>+50</b><span>escaparates negociados</span></div><div><b>5</b><span>circuitos</span></div></div>
 <p class="who"><b>Con quién:</b> MediaMarkt, Samsung, y comercios de barrio de Barcelona: autoescuelas, peluquerías, fruterías y tiendas en zonas turísticas.</p>
 </div>
-<div class="figs"><figure><img src="img/gomarmedia-pantalla-escaparate.jpg" alt="Pantalla de GomarMedia en un escaparate" onerror="this.parentElement.classList.add('hidden')"><figcaption>Una pantalla del circuito, de cara a la calle.</figcaption></figure><figure><img src="img/gomarmedia-logo.png" alt="Logotipo de GomarMedia" onerror="this.parentElement.classList.add('hidden')"><figcaption>GomarMedia.</figcaption></figure></div>
+<div class="figs"><figure><img src="img/gomarmedia-pantalla-escaparate.jpg" alt="Pantalla de GomarMedia en un escaparate" onerror="this.parentElement.classList.add('hidden')"><figcaption>Una pantalla del circuito, de cara a la calle.</figcaption></figure><figure><img src="img/gomarmedia-instalacion.jpg" alt="Instalación de una pantalla GomarMedia" onerror="this.parentElement.classList.add('hidden')"><figcaption>Instalación en el escaparate de un comercio.</figcaption></figure></div>
+<a class="dl" href="docs/gomarmedia-diptico-comercial.pdf" download>Díptico comercial GomarMedia (PDF)</a>
 </div></div></article>
 
 <article class="case flip" id="licoralia"><div class="wrap">
-<div class="head"><img class="logo" src="img/logo-ventadelicores.png" alt="" onerror="this.classList.add('hide')"><h3>Licoralia · VentadeLicores.com · Tsingtao</h3><span class="yr">2012 – 2016</span><span class="rl">Gerente · Distribución de bebidas e importación</span></div>
+<div class="head"><img class="logo" src="img/logo-licoralia.png" alt="" onerror="this.classList.add('hide')"><h3>Licoralia · VentadeLicores.com · Tsingtao</h3><span class="yr">2012 – 2016</span><span class="rl">Gerente · Distribución de bebidas e importación</span></div>
 <div class="body"><div class="text"><dl class="sar">
 <div><dt>Situación</dt><dd>Una marca internacional sin importador exclusivo en España, y un canal de hostelería que todavía compraba por teléfono y catálogo en papel.</dd></div>
 <div><dt>Acción</dt><dd><ul><li>Negociación directa con la cervecera Tsingtao, de propiedad estatal china, en la sede de su filial europea en París y ante una delegación oficial del país. Competían grupos de gran distribución y la exclusividad para toda España se concedió a Licoralia.</li><li>Red de distribuidores en Madrid, Valencia y Andalucía; nave de 1.500 m² en Barberà del Vallès, ERP propio y reparto a bares y restaurantes.</li><li>VentadeLicores.com sobre PrestaShop: la primera web de autoservicio profesional del sector para hostelería, con sellos de garantía como Confianza Online y un acuerdo con Correos para hacer llegar el catálogo a todos los profesionales del canal.</li></ul></dd></div>
@@ -258,7 +260,7 @@ footer{padding:22px 0;font-size:.84rem;color:var(--ink2)}
 <div class="strip"><div><b>+15</b><span>contenedores al año</span></div><div><b>1,6 M€</b><span>facturación anual</span></div><div><b>+5.000</b><span>referencias online</span></div><div><b>320</b><span>clientes activos</span></div></div>
 <p class="who"><b>Con quién:</b> Tsingtao, Telefónica, Mecalux, Correos, SEUR, MRW, Confianza Online y distribuidores en Madrid, Valencia y Andalucía.</p>
 </div>
-<div class="figs"><figure><img src="img/tsingtao-botella.jpg" alt="Botella de cerveza Tsingtao" style="max-height:440px;object-fit:contain;background:#fff;padding:20px"><figcaption>Tsingtao, distribuidor exclusivo para España.</figcaption></figure><figure><img src="img/ventadelicores-logo.png" alt="Logotipo de VentadeLicores.com" onerror="this.parentElement.classList.add('hidden')" style="object-fit:contain;max-height:180px;padding:20px;background:#fff"><figcaption>VentadeLicores.com: “precios que destilan optimismo”.</figcaption></figure></div>
+<div class="figs"><figure><img src="img/tsingtao-botella.jpg" alt="Botella de cerveza Tsingtao" style="max-height:440px;object-fit:contain;background:#fff;padding:20px"><figcaption>Tsingtao, distribuidor exclusivo para España.</figcaption></figure><figure><img src="img/licoralia-catalogo.jpg" alt="Catálogo de Licoralia" onerror="this.parentElement.classList.add('hidden')"><figcaption>Catálogo de Licoralia para hostelería.</figcaption></figure></div>
 </div></div></article>
 
 <article class="case" id="openservice"><div class="wrap">
@@ -273,21 +275,21 @@ footer{padding:22px 0;font-size:.84rem;color:var(--ink2)}
 <a class="dl" href="docs/openservice-catalogo-corporativo-2009.pdf" download>Catálogo corporativo 2009 (PDF)</a>
 </div>
 <div class="figs"><figure><img src="img/openservice-openstop-estacion.jpg" alt="Máquina OpenStop en una estación"><figcaption>OpenStop en una estación de tren.</figcaption></figure>
-<div class="row"><figure><img src="img/openservice-opencity-kiosco.jpg" alt="Kiosco Open City en espacio público"><figcaption>Open City en Castellar del Vallès.</figcaption></figure><figure><img src="img/openservice-openshop-centro-comercial.jpg" alt="OpenShop en un centro comercial" style="height:100%;min-height:200px"><figcaption>OpenShop en un centro comercial.</figcaption></figure></div>
-<figure><img src="img/openservice-catalogo-2009-unidades-openstop-openlife-openshop.jpg" alt="Máquinas OpenStop, OpenLife y OpenShop" style="object-fit:contain;max-height:560px;background:#fff"><figcaption>Tres unidades, tres nichos: OpenStop (transporte), OpenLife (salud) y OpenShop (comercio y ocio). Catálogo 2009.</figcaption></figure></div>
+<div class="row"><figure><img src="img/opencity-castellar-parque-principal.jpg" alt="Kiosco Open City en un parque de Castellar del Vallès" onerror="this.src='img/openservice-opencity-kiosco.jpg'"><figcaption>Open City en espacio público, Castellar del Vallès.</figcaption></figure><figure><img src="img/openservice-openshop-centro-comercial.jpg" alt="OpenShop en un centro comercial" style="height:100%;min-height:200px"><figcaption>OpenShop en un centro comercial.</figcaption></figure></div>
+<figure><img src="img/opencity-calle.jpg" alt="Kiosco Open City en una calle de Castellar del Vallès" onerror="this.parentElement.classList.add('hidden')"><figcaption>Open City en la calle: mobiliario urbano fabricado a medida.</figcaption></figure><figure><img src="img/openservice-catalogo-2009-unidades-openstop-openlife-openshop.jpg" alt="Máquinas OpenStop, OpenLife y OpenShop" style="object-fit:contain;max-height:560px;background:#fff"><figcaption>Tres unidades, tres nichos: OpenStop (transporte), OpenLife (salud) y OpenShop (comercio y ocio). Catálogo 2009.</figcaption></figure></div>
 </div></div></article>
 
 <article class="case flip" id="sedifa"><div class="wrap">
 <div class="head"><img class="logo" src="img/logo-sedifa.png" alt="" onerror="this.classList.add('hide')"><h3>Sedifa</h3><span class="yr">2000 – 2005</span><span class="rl">Director de marketing · Distribución farmacéutica</span></div>
 <div class="body"><div class="text"><dl class="sar">
 <div><dt>Situación</dt><dd>Una distribuidora con más de 50 millones de euros de ventas, imagen anticuada y un canal, la farmacia, que empezaba a exigir servicio y rapidez.</dd></div>
-<div><dt>Acción</dt><dd><ul><li>Renovación completa de la identidad corporativa en 2004: logotipo, flota, facturas, papelería y punto de venta.</li><li>Lanzamiento nacional de NewFarma, el primer dispensador automático de medicamentos publicitarios (EFP) de España.</li><li>Farmaexpress: entrega a farmacias en treinta minutos con una flota de ocho motos, y circuito de publicidad en pantalla en farmacias.</li></ul></dd></div>
+<div><dt>Acción</dt><dd><ul><li>Renovación completa de la identidad corporativa en 2004: logotipo, flota, facturas, papelería y punto de venta.</li><li>Lanzamiento nacional de NewFarma, el primer dispensador automático de medicamentos publicitarios (EFP) de España.</li><li>Farmaexpress: entrega urgente a farmacias en treinta minutos, sobre una flota de más de veinte furgonetas y camiones, y circuito de publicidad en pantalla en farmacias.</li></ul></dd></div>
 <div class="r"><dt>Resultado</dt><dd><ul><li>Una marca renovada de la furgoneta a la factura y una distribuidora que pasó de vender producto a vender servicio.</li><li>Más de treinta dispensadores NewFarma instalados: una categoría nueva que abrió la puerta a la siguiente etapa, el vending.</li></ul></dd></div>
 </dl>
-<div class="strip"><div><b>+50 M€</b><span>ventas del grupo</span></div><div><b>+30</b><span>dispensadores NewFarma</span></div><div><b>30 min</b><span>entrega Farmaexpress</span></div><div><b>8</b><span>motos de reparto</span></div></div>
+<div class="strip"><div><b>+50 M€</b><span>ventas del grupo</span></div><div><b>+30</b><span>dispensadores NewFarma</span></div><div><b>+20</b><span>furgonetas y camiones</span></div><div><b>30 min</b><span>entrega Farmaexpress</span></div></div>
 <p class="who"><b>Con quién:</b> más de seiscientas farmacias de Cataluña, laboratorios y fabricantes del canal farmacia, agencia de publicidad y proveedores de identidad corporativa.</p>
 </div>
-<div class="figs"><figure><img src="img/sedifa-cambio-imagen-antes-despues-2004.jpg" alt="Logotipo antiguo y nuevo de Sedifa"><figcaption>Antes y después: de la cruz roja al globo verde. Enero de 2004.</figcaption></figure><figure><img src="img/sedifa-newfarma-dispensador.jpg" alt="Dispensador automático NewFarma en una farmacia" onerror="this.parentElement.classList.add('hidden')"><figcaption>NewFarma, el primer dispensador automático de EFP de España.</figcaption></figure></div>
+<div class="figs"><figure><img src="img/sedifa-cambio-imagen-antes-despues-2004.jpg" alt="Logotipo antiguo y nuevo de Sedifa"><figcaption>Antes y después: de la cruz roja al globo verde. Enero de 2004.</figcaption></figure><figure><img src="img/sedifa-newfarma-dispensador.jpg" alt="Dispensador automático NewFarma" onerror="this.parentElement.classList.add('hidden')"><figcaption>NewFarma, el primer dispensador automático de EFP de España.</figcaption></figure><div class="row"><figure><img src="img/sedifa-picking-almacen.jpg" alt="Zona de picking del almacén de Sedifa" onerror="this.parentElement.classList.add('hidden')"><figcaption>Picking en el almacén.</figcaption></figure><figure><img src="img/sedifa-furgonetas.jpg" alt="Flota de furgonetas de Sedifa" onerror="this.parentElement.classList.add('hidden')"><figcaption>La flota de reparto.</figcaption></figure></div></div>
 </div></div></article>
 
 <section class="mist" id="saber"><div class="wrap">
@@ -336,20 +338,21 @@ footer{padding:22px 0;font-size:.84rem;color:var(--ink2)}
 
 <section id="hoy"><div class="wrap today">
 <div><p class="eyebrow">2024 – 2026</p><h2>Cómo trabajo hoy</h2>
-<p>Dos años de formación a fondo en inteligencia artificial generativa y automatización de procesos, con cursos oficiales de Google y Anthropic, y de ponerla a trabajar: análisis de datos, documentación comercial, flujos automáticos entre aplicaciones y agentes que ejecutan tareas en el ordenador.</p>
-<p>Parte de esa práctica ha sido el trading algorítmico: diseñar, programar y auditar sistemas automáticos (Expert Advisors en MetaTrader 5) es la mejor escuela de disciplina, datos y control de riesgo. No es un proyecto aparte. Es la misma obsesión por el control y la trazabilidad de siempre, con herramientas que en 2007 no existían. Experiencia real de negocio más dominio práctico de estas herramientas: la combinación que buscan las empresas que quieren ganar eficiencia sin perder criterio.</p>
+<p>Dos años de formación a fondo en inteligencia artificial generativa y automatización de procesos, con cursos oficiales de Google y Anthropic, aplicada al día a día de la gestión: análisis de datos, documentación comercial, flujos automáticos entre aplicaciones y agentes que ejecutan tareas en el ordenador.</p>
+<p>En paralelo, el Máster de Trading Algorítmico de Traders Business School ha añadido el dominio de los mercados financieros y la programación de sistemas automáticos (Expert Advisors en MetaTrader 5): la misma disciplina de datos, control y trazabilidad de siempre, aplicada ahora con herramientas que en 2007 no existían. Experiencia real de negocio y dominio práctico de la IA: la combinación que buscan las empresas que quieren ganar eficiencia sin perder criterio.</p>
 <div class="tools"><span>Claude</span><span>ChatGPT</span><span>Gemini</span><span>Grok</span><span>Make</span><span>Slack</span><span>Microsoft 365 · Excel</span><span>Google Workspace</span><span>Notion</span><span>ERP UNIT4</span><span>PrestaShop</span><span>MetaTrader 5</span></div></div>
 <div id="formacion"><p class="eyebrow">Formación</p><h2>Académica y complementaria</h2>
 <ul class="edu">
 <li><b>Máster en Marketing</b><span>EAE Business School</span></li>
-<li><b>Ciencias Empresariales</b><span>EAE Business School</span></li>
+<li><b>Ciencias Empresariales</b><span>EAE Business School · Erasmus en Nottingham Trent University (Reino Unido)</span></li>
 <li><b>Cuadro de Mando Integral</b><span>IESE</span></li>
-<li><b>Finanzas para No Financieros</b><span>EADA</span></li>
-<li><b>Especialización en Comunicación</b><span>Icompani</span></li>
-<li><b>IA generativa y automatización de procesos</b><span>Cursos oficiales de Google y Anthropic, 2024-2026</span></li>
-<li><b>Máster en trading algorítmico y sistemas automatizados</b><span>2024-2025 · Diseño de sistemas automáticos con MetaTrader 5</span></li>
-<li><b>Informática de gestión</b><span>C.E.I. Sabadell (1997) · ContaPlus (1998)</span></li>
-<li><b>PER, carnet B y vehículo propio</b><span>Castellano y catalán nativos</span></li>
+<li><b>Finanzas para No Financieros · Análisis de Balance</b><span>EADA</span></li>
+<li><b>Especialización en Oratoria y Comunicación</b><span>Icompani</span></li>
+<li><b>Creación de una Empresa</b><span>Cámara de Comercio de Sabadell</span></li>
+<li><b>IA generativa y automatización de procesos</b><span>Cursos oficiales de Google y Anthropic</span></li>
+<li><b>Máster de Trading Algorítmico</b><span>Traders Business School · Mercados financieros, sistemas automáticos (Expert Advisors) y programación de robots con IA</span></li>
+<li><b>Informática de gestión y contabilidad</b><span>C.E.I. Sabadell · ContaPlus</span></li>
+<li><b>Carnet B y vehículo propio</b><span>Castellano y catalán nativos</span></li>
 </ul></div>
 </div></section>
 
@@ -360,7 +363,6 @@ footer{padding:22px 0;font-size:.84rem;color:var(--ink2)}
 <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3.6 8.5c3 1 5 3 5.4 6.5M20.4 8.5c-3 1-5 3-5.4 6.5M4 15.5c2.5-2 5.5-2.8 8-2.8s5.5.8 8 2.8M12 3v18"/></svg>Baloncesto</div>
 <div><svg viewBox="0 0 24 24"><ellipse cx="9.5" cy="9" rx="6" ry="7"/><path d="M13.5 14.5 20 21M7 6.5l5 5M6 9.5l4 4M9 4.5l5 5"/></svg>Pádel</div>
 <div><svg viewBox="0 0 24 24"><path d="M3 20 9 8l4 7 3-4 5 9zM12 4v2"/></svg>Senderismo</div>
-<div><svg viewBox="0 0 24 24"><path d="M3 17h18l-2 3H5zM12 3v12M12 3l7 11H5z"/></svg>Navegar</div>
 <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Viajar</div>
 <div><svg viewBox="0 0 24 24"><circle cx="8" cy="7" r="3"/><circle cx="16" cy="8" r="2.5"/><path d="M2 20c0-4 3-6 6-6s6 2 6 6M13 20c0-3 2-5 4-5s5 2 5 5"/></svg>Familia</div>
 <div><svg viewBox="0 0 24 24"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg>Lectura</div>
@@ -383,6 +385,7 @@ footer{padding:22px 0;font-size:.84rem;color:var(--ink2)}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
+var nav=document.querySelector(".nav"),menu=document.getElementById("menu"),bg=document.querySelector(".burger");bg.addEventListener("click",function(){var o=menu.classList.toggle("open");nav.classList.toggle("on",o);bg.setAttribute("aria-expanded",o)});menu.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){menu.classList.remove("open");nav.classList.remove("on")})});
 // tabs
 document.querySelectorAll('.tabs [role=tab]').forEach(function(b){b.addEventListener('click',function(){
  document.querySelectorAll('.tabs [role=tab]').forEach(function(x){x.setAttribute('aria-selected','false')});
@@ -394,6 +397,8 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInter
  else{e.target.classList.add('in')} io.unobserve(e.target)}})},{threshold:.2});
 document.querySelectorAll('.timeline li').forEach(function(l){io.observe(l)});
 var bars=document.querySelector('.bars');if(bars)io.observe(bars);
+var ko=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;ko.unobserve(e.target);var b=e.target,t=b.textContent,m=t.match(/^([+]?)([\d.]+)(.*)$/);if(!m)return;var pre=m[1],num=parseFloat(m[2].replace(/\./g,'')),suf=m[3],dots=m[2].indexOf('.')>-1,st=performance.now();function f(n){return dots?n.toLocaleString('es-ES'):String(n)}(function step(now){var p=Math.min(1,(now-st)/1100),v=Math.round(num*(1-Math.pow(1-p,3)));b.textContent=pre+f(v)+suf;if(p<1)requestAnimationFrame(step)})(st)})},{threshold:.6});
+document.querySelectorAll('.kpi b, .strip b').forEach(function(b){ko.observe(b)});
 // map
 (function(){var el=document.getElementById('map');if(!el||!window.L)return;
 var map=L.map(el,{scrollWheelZoom:false,worldCopyJump:true}).setView([22,5],2);
