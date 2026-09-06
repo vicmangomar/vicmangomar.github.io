@@ -150,6 +150,7 @@ section{padding:88px 0}
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
 .gallery figure{margin:0;cursor:zoom-in}
 .gallery img{aspect-ratio:4/3;object-fit:cover;border-radius:6px;border:1px solid var(--line);background:#fff;transition:transform .35s ease,box-shadow .35s ease}
+.gallery figure.doc img{object-fit:contain;padding:6px}
 .gallery figure:hover img{transform:translateY(-4px);box-shadow:0 18px 30px -18px rgba(14,39,67,.45)}
 .media img{transition:transform .4s ease}
 .media:hover img{transform:translateY(-4px)}
@@ -174,11 +175,14 @@ section{padding:88px 0}
 .panel li{padding:10px 0;border-top:1px solid var(--line);font-size:.98rem}
 .panel li:first-child{border-top:0;padding-top:0}
 .panel li strong{color:var(--navy);font-weight:600}
-.years{margin-top:40px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px 28px}
-.years div{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:14px 0;border-top:1px solid var(--line)}
-.years div:first-child{border-top:0}
-.years span{font-size:1rem;color:var(--ink);font-weight:500}
-.years b{font-family:var(--serif);font-size:1.7rem;font-weight:500;color:var(--navy);line-height:1;white-space:nowrap}
+.years{margin-top:44px;display:grid;grid-template-columns:repeat(5,1fr);gap:22px}
+.years div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px 18px 18px;position:relative;overflow:hidden}
+.years b{display:block;font-family:var(--serif);font-size:2.6rem;font-weight:500;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+.years span{display:block;font-size:.9rem;color:var(--slate);margin-top:8px;min-height:2.6em}
+.years i{display:block;height:4px;background:var(--navy-soft);border-radius:2px;margin-top:14px;overflow:hidden}
+.years i::after{content:"";display:block;height:100%;width:0;background:var(--navy);transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+.years.in i::after{width:var(--w)}
+@media (max-width:900px){.years{grid-template-columns:repeat(2,1fr);gap:14px}.years b{font-size:2.1rem}}
 .years-note{font-size:.85rem;color:var(--slate);margin-top:14px}
 @media (max-width:900px){.panel.on{grid-template-columns:1fr;gap:20px;padding:24px}}
 
@@ -203,9 +207,16 @@ section{padding:88px 0}
 @media (max-width:600px){#map .lbl{display:none}#map .fair{r:5}}
 
 /* TIMELINE */
-.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);max-width:760px}
-.tl li{position:relative;padding:0 0 34px 34px}
-.tl li::before{content:"";position:absolute;left:-7px;top:9px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--navy)}
+.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);max-width:760px;position:relative}
+.tl li{position:relative;padding:0 0 34px 34px;transition:transform .3s}
+.tl li::before{content:"";position:absolute;left:-9px;top:8px;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--navy);transform:scale(.5);transition:transform .5s cubic-bezier(.2,.7,.2,1),background .3s}
+.tl li::after{content:"";position:absolute;left:-9px;top:8px;width:16px;height:16px;border-radius:50%;border:2px solid var(--navy);opacity:0}
+.tl li.in::before{transform:scale(1)}
+.tl li.in::after{animation:ring 1.4s ease-out .2s 1}
+.tl li:hover::before{background:var(--navy);transform:scale(1.25)}
+.tl li:hover .when{color:var(--steel)}
+.tl li:hover h3{color:var(--navy)}
+@keyframes ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(3);opacity:0}}
 .tl .when{font-family:var(--serif);color:var(--navy);font-size:1.05rem}
 .tl h3{font-size:1.25rem;margin:4px 0 6px}
 .tl p{color:var(--slate);margin:0;font-size:.98rem}
@@ -213,8 +224,13 @@ section{padding:88px 0}
 /* TODAY */
 .today{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:start}
 .today p{color:#2a3442}
-.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.tools li{list-style:none;border:1px solid var(--line);border-radius:6px;padding:12px 8px;text-align:center;font-size:.9rem;font-weight:600;color:var(--navy);background:#fff}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0;padding:0;list-style:none}
+.tools li{border:1px solid var(--line);border-radius:10px;padding:14px 10px;text-align:center;font-size:.86rem;font-weight:600;color:var(--ink);background:#fff;transition:transform .3s,box-shadow .3s,border-color .3s}
+.tools li:hover{transform:translateY(-4px);box-shadow:0 14px 26px -16px rgba(14,39,67,.45);border-color:transparent}
+.tools em{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;margin:0 auto 10px;font:700 .95rem var(--sans);font-style:normal;color:#fff;letter-spacing:.02em;transition:transform .3s}
+.tools li:hover em{transform:rotate(-6deg) scale(1.08)}
+.tools small{display:block;font-weight:500;color:var(--slate);font-size:.76rem;margin-top:2px}
+@media (max-width:900px){.tools{grid-template-columns:repeat(3,1fr);gap:8px}.tools li{padding:12px 6px}}
 @media (max-width:900px){.today{grid-template-columns:1fr}}
 
 /* EDU */
@@ -227,10 +243,12 @@ section{padding:88px 0}
 /* OUT OF OFFICE */
 .hobbies{display:grid;grid-template-columns:repeat(8,1fr);gap:14px;margin:0;padding:0;list-style:none}
 .hobbies li{cursor:default}
-.hobbies li:hover svg{transform:translateY(-4px) scale(1.08);stroke:#fff;fill:var(--navy)}
+.hobbies li:hover svg{transform:translateY(-6px) rotate(-8deg);stroke:#fff;background:var(--navy);box-shadow:0 16px 26px -14px rgba(14,39,67,.6)}
 .hobbies li:hover{color:var(--navy)}
 .hobbies li{list-style:none;text-align:center;font-size:.85rem;color:var(--slate)}
-.hobbies svg{width:40px;height:40px;stroke:var(--navy);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 8px;display:block;transition:transform .3s ease,fill .3s ease,stroke .3s ease;padding:4px;border-radius:50%}
+.hobbies svg{width:84px;height:84px;padding:22px;stroke:var(--navy);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 12px;display:block;border-radius:50%;background:var(--navy-soft);transition:transform .35s cubic-bezier(.2,.7,.2,1),background .3s,stroke .3s,box-shadow .35s}
+.hobbies li{font-weight:500;color:var(--ink)}
+@media (max-width:900px){.hobbies svg{width:68px;height:68px;padding:17px}}
 @media (max-width:900px){.hobbies{grid-template-columns:repeat(4,1fr);gap:18px 8px}}
 
 /* CONTACT */
@@ -345,22 +363,22 @@ footer p{margin-top:10px}
         <li class="key">Startup tecnológica</li><li>Producto digital y app móvil</li><li>Financiación pública e inversores</li><li>Dirección de equipo de desarrollo</li><li>Marketing de lanzamiento</li><li>Marca e identidad con agencia</li>
       </ul>
       <div class="case-body">
-        <figure class="media"><img src="img/looplan-app-capturas.jpg" width="1400" height="788" alt="Pantallas de la app Looplan" loading="lazy"><figcaption>La app: planes por intereses, chat de grupo y quedada en persona.</figcaption></figure>
+        <figure class="media"><img src="img/looplan-deck-app.jpg" width="417" height="789" alt="Pantalla principal de la app Looplan" loading="lazy"><figcaption>La app: planes por intereses, grupo y quedada.</figcaption></figure>
         <dl class="sar">
-          <dt>Situación</dt><dd><p>La soledad no deseada afecta a un tercio de la población, sobre todo joven, y las apps existentes no resolvían cómo hacer amigos con seguridad. La respuesta: quedar en grupo alrededor de un plan común.</p></dd>
-          <dt>Acción</dt><dd><p>Llevé la idea a producto: MVP en seis meses y versión 2.0 con equipo propio de quince profesionales de desarrollo y producto y un equipo directivo de cinco.</p><p>Capté la financiación pública (Programa Investigo, Ayuntamiento de Madrid e ICEX), lancé en App Store y Google Play y definí el modelo freemium con la línea Looplan Business para negocios de proximidad.</p></dd>
-          <dt>Resultado</dt><dd><p>60.000 usuarios en los tres primeros meses y más de 80.000 en total, con un coste de captación de 0,10 € por usuario; top 10 de tendencias de la App Store en España en el lanzamiento.</p><p>933.519 € de financiación pública documentada. Nueva imagen de marca en 2024 con la agencia Summa, que publicó Looplan como caso de estudio.</p><p class="neg">Negociado: ronda de inversión con fondos y business angels.</p></dd>
-        </dl>
+<dt>Situación</dt><dd><p>La soledad no deseada afecta a un tercio de la población, especialmente a los jóvenes, y las aplicaciones existentes, pensadas para citas, no resolvían cómo hacer amigos con seguridad. La respuesta fue quedar en grupo alrededor de un plan común.</p></dd>
+<dt>Acción</dt><dd><p>Dirección del proyecto desde la idea hasta el producto: un MVP en seis meses y una versión 2.0 desarrollada por un equipo propio de quince profesionales de producto y tecnología, con un comité directivo integrado por cinco personas.</p><p>Captación de la financiación pública (Programa Investigo, Ayuntamiento de Madrid e ICEX), lanzamiento en App Store y Google Play, y definición del modelo freemium con Looplan Business, la línea pensada para los negocios de proximidad.</p></dd>
+<dt>Resultado</dt><dd><p>60.000 usuarios en los tres primeros meses y más de 80.000 en total, con un coste de captación de 0,10 € por usuario y entrada en el top 10 de tendencias de la App Store en España.</p><p>933.519 € de financiación pública conseguida. Nueva identidad de marca en 2024 con la agencia Summa, que publicó Looplan como caso de estudio.</p><p class="neg">Negociado: ronda de inversión con fondos y business angels.</p></dd>
+</dl>
       </div>
       <div class="figs">
         <div><b>+80.000</b><span>usuarios</span></div><div><b>Top 10</b><span>App Store España</span></div><div><b>933 k€</b><span>ayudas públicas</span></div><div><b>0,10 €</b><span>coste por usuario</span></div>
       </div>
       <p class="with"><strong>Con quién:</strong> Programa Investigo (SEPE), Ayuntamiento de Madrid, ICEX, agencia Summa, Apple App Store y Google Play.</p>
       <div class="gallery">
-<figure><img src="img/looplan-deck-app.jpg" alt="Pantalla principal de la app Looplan" loading="lazy"><figcaption>La app: planes por intereses, grupo y quedada.</figcaption></figure>
-<figure><img src="img/looplan-deck-como-funciona.jpg" alt="Cómo funciona Looplan: loopea, chatea en grupo y disfruta del plan" loading="lazy"><figcaption>Loopea, chatea en grupo, disfruta del plan.</figcaption></figure>
-<figure><img src="img/looplan-deck-business.jpg" alt="Looplan Business: publicidad segmentada para negocios" loading="lazy"><figcaption>Looplan Business: los negocios proponen sus planes.</figcaption></figure>
-<figure><img src="img/looplan-deck-why-now.jpg" alt="Hitos de Looplan: usuarios, financiación y equipo" loading="lazy"><figcaption>Hitos: 80.000 usuarios, 900.000 € de financiación y equipo propio. Imagen de marca desarrollada por la agencia Summa.</figcaption></figure>
+<figure><img src="img/looplan-app-capturas.jpg" alt="Pantallas de la app Looplan" loading="lazy"><figcaption>Planes por intereses, chat de grupo y quedada en persona.</figcaption></figure>
+<figure class="doc"><img src="img/looplan-deck-como-funciona.jpg" alt="Cómo funciona Looplan" loading="lazy"><figcaption>Loopea, chatea en grupo, disfruta del plan.</figcaption></figure>
+<figure class="doc"><img src="img/looplan-deck-business.jpg" alt="Looplan Business" loading="lazy"><figcaption>Looplan Business: los negocios proponen sus planes.</figcaption></figure>
+<figure class="doc"><img src="img/looplan-deck-why-now.jpg" alt="Hitos de Looplan" loading="lazy"><figcaption>Hitos: 80.000 usuarios, 900.000 € de financiación y equipo propio. Imagen de marca desarrollada por la agencia Summa.</figcaption></figure>
 </div>
     </article>
 
@@ -377,37 +395,37 @@ footer p{margin-top:10px}
         <li class="key">Creación de marca y producto</li><li>Gran consumo y retail</li><li>Exportación</li><li>Centrales de compra</li><li>Packaging, etiquetas y expositor</li><li>Concursos internacionales</li><li>Reparto propio</li>
       </ul>
       <div class="case-body">
-        <figure class="media"><img src="img/bellapilar-furgoneta-gama.jpg" width="859" height="840" alt="Gama Bella Pilar rotulada en el vehículo de reparto" loading="lazy"><figcaption>La gama completa, rotulada en el vehículo de reparto.</figcaption></figure>
+        <figure class="media"><img src="img/bellapilar-instinto-copa.jpg" width="665" height="1000" alt="Botella de Bella Pilar Instinto" loading="lazy"><figcaption>Instinto, tempranillo y syrah: la primera referencia de la marca.</figcaption></figure>
         <dl class="sar">
-          <dt>Situación</dt><dd><p>Un mercado saturado de vinos de La Mancha sin marca y a precio bajo. La oportunidad: crear una marca con identidad y premios y venderla a cadenas y distribuidores fuera de España.</p></dd>
-          <dt>Acción</dt><dd><p>Creé la marca desde cero: nombre, selección de variedades y coupages, etiquetas, packaging y presentación a concursos. Elaboración en bodega con certificado IFS; nueve referencias con blancos y tintos ecológicos.</p><p>Innovación en producto: vidrio 100 % reciclado, contraetiqueta “medidor de momentos” y corcho escribible. Negociación directa con centrales de compra en España, Centroamérica e Italia, y diseño del expositor exclusivo de marca para el lineal.</p></dd>
-          <dt>Resultado</dt><dd>
-            <p class="sold"><strong>Vendido y servido:</strong> Walmart Centroamérica (cinco países), Aldi Italia (único vino español del lineal), Condis (más de 200 supermercados) y distribuidores en México, Francia, Chipre, Lituania y Congo.</p>
-            <p class="neg"><strong>Negociado:</strong> centrales de compra de Mercadona, Carrefour, El Corte Inglés, Alcampo, Makro, Miquel Alimentació, Caprabo, Consum, Veritas y Lidl, entre otras.</p>
-            <p>25 medallas en seis vinos: Guía Peñín, Catavinum, Mundus Vini, Berliner Wine Trophy, Asia Wine Awards, EcoVino, Organic Awards, Vino Sub30, Premios Mezquita y Calidad de La Mancha. En 2022 la marca se vendió a la bodega elaboradora junto con toda la cartera de clientes.</p>
-          </dd>
-        </dl>
+<dt>Situación</dt><dd><p>Un mercado saturado de vinos de La Mancha sin marca reconocible, que competían únicamente por precio. La oportunidad estaba en crear una marca con identidad propia, avalarla con premios internacionales y llevarla a cadenas y distribuidores fuera de España.</p></dd>
+<dt>Acción</dt><dd><p>Concepción de la marca Bella Pilar desde el nombre hasta el lineal: selección de variedades y coupages, diseño de etiquetas y packaging, presentación a concursos y elaboración en una bodega con certificado IFS. Nueve referencias, con blancos y tintos ecológicos, y tres innovaciones de producto: vidrio 100 % reciclado, contraetiqueta “medidor de momentos” y corcho escribible.</p><p>Negociación directa con centrales de compra de España, Centroamérica e Italia, y diseño de un expositor exclusivo de marca para el punto de venta.</p></dd>
+<dt>Resultado</dt><dd>
+<p class="sold"><strong>Vendido y servido:</strong> Walmart Centroamérica (cinco países), Aldi Italia (único vino español del lineal), Condis (más de 200 supermercados) y distribuidores en México, Francia, Chipre, Lituania y Congo.</p>
+<p class="neg"><strong>Negociado:</strong> centrales de compra de Mercadona, Carrefour, El Corte Inglés, Alcampo, Makro, Miquel Alimentació, Caprabo, Consum, Veritas y Lidl, entre otras.</p>
+<p>25 medallas en seis vinos: Guía Peñín, Catavinum, Mundus Vini, Berliner Wine Trophy, Asia Wine Awards, EcoVino, Organic Awards, Vino Sub30, Premios Mezquita y Calidad de La Mancha. En 2022 la marca se vendió a la bodega elaboradora junto con su cartera de clientes.</p></dd>
+</dl>
       </div>
       <div class="figs">
         <div><b>11</b><span>países</span></div><div><b>25</b><span>medallas</span></div><div><b>+200</b><span>supermercados Condis</span></div><div><b>9</b><span>referencias</span></div>
       </div>
       <p class="with"><strong>Con quién:</strong> Walmart Centroamérica, Aldi Italia, Condis, bodega cooperativa de Mota del Cuervo y prospección de importadores con dieciocho cámaras de comercio bilaterales, en Alemania, Bélgica, Francia, Italia, Reino Unido, Polonia, Chequia, Dinamarca, Suecia, Noruega, Finlandia, Grecia, Lituania y México, entre otros mercados.</p>
       <div class="gallery">
-<figure><img src="img/bellapilar-logotipo.jpg" alt="Logotipo de Bella Pilar" loading="lazy"><figcaption>Bella Pilar, la marca creada desde cero.</figcaption></figure>
+<figure class="doc"><img src="img/bellapilar-logotipo.jpg" alt="Logotipo de Bella Pilar" loading="lazy"><figcaption>Bella Pilar, la marca creada desde cero.</figcaption></figure>
 <figure><img src="img/bellapilar-coleccion.jpg" alt="La colección Bella Pilar" loading="lazy"><figcaption>La colección: cada vino lleva un rasgo de carácter.</figcaption></figure>
-<figure><img src="img/bellapilar-instinto-copa.jpg" alt="Botella de Bella Pilar Instinto con copa" loading="lazy"><figcaption>Instinto, tempranillo y syrah.</figcaption></figure>
-<figure><img src="img/bellapilar-pale-almacen.jpg" alt="Palé de Bella Pilar Instinto en almacén" loading="lazy"><figcaption>Instinto, preparado para salir del almacén.</figcaption></figure>
-<figure><img src="img/bellapilar-expositor-condis.jpg" alt="Expositor exclusivo de Bella Pilar en el lineal de Condis" loading="lazy"><figcaption>El expositor exclusivo de marca en el lineal.</figcaption></figure>
-<figure><img src="img/bellapilar-presentacion-actitud.jpg" alt="Presentación comercial Bella Pilar es actitud" loading="lazy"><figcaption>Presentación comercial: "Bella Pilar es actitud".</figcaption></figure>
-<figure><img src="img/bellapilar-carta-gama.jpg" alt="Carta de la gama Bella Pilar con notas de cata" loading="lazy"><figcaption>La gama completa con notas de cata.</figcaption></figure>
-<figure><img src="img/bellapilar-ficha-portada.jpg" alt="Ficha comercial de Temple, portada" loading="lazy"><figcaption>Ficha comercial de Temple.</figcaption></figure>
-<figure><img src="img/bellapilar-ficha-temple.jpg" alt="Ficha comercial de Temple, botellas" loading="lazy"><figcaption>Temple, crianza de tempranillo.</figcaption></figure>
-<figure><img src="img/bellapilar-ficha-instinto.jpg" alt="Ficha comercial de Instinto" loading="lazy"><figcaption>Ficha comercial de Instinto.</figcaption></figure>
-<figure><img src="img/bellapilar-medidor-de-momentos.jpg" alt="Contraetiqueta medidor de momentos" loading="lazy"><figcaption>El "medidor de momentos" de la contraetiqueta.</figcaption></figure>
+<figure><img src="img/bellapilar-furgoneta-gama.jpg" alt="Gama Bella Pilar en el vehículo de reparto" loading="lazy"><figcaption>La gama completa, rotulada en el vehículo de reparto.</figcaption></figure>
+<figure><img src="img/bellapilar-pale-almacen.jpg" alt="Palé de Instinto en almacén" loading="lazy"><figcaption>Instinto, preparado para salir del almacén.</figcaption></figure>
+<figure><img src="img/bellapilar-expositor-condis.jpg" alt="Expositor exclusivo en el lineal" loading="lazy"><figcaption>El expositor exclusivo de marca en el lineal.</figcaption></figure>
 <figure><img src="img/bellapilar-coraje.jpg" alt="Bella Pilar Coraje" loading="lazy"><figcaption>Coraje, ecológico: nueve medallas.</figcaption></figure>
+<figure><img src="img/bellapilar-temple.jpg" alt="Bella Pilar Temple" loading="lazy"><figcaption>Temple, crianza de tempranillo.</figcaption></figure>
 <figure><img src="img/bellapilar-pureza.jpg" alt="Bella Pilar Pureza" loading="lazy"><figcaption>Pureza, blanco de airén, macabeo y chardonnay.</figcaption></figure>
-<figure><img src="img/bellapilar-furgoneta.jpg" alt="Vehículo de reparto rotulado de Bella Pilar" loading="lazy"><figcaption>Reparto propio con vehículo rotulado.</figcaption></figure>
-<figure><img src="img/bellapilar-temple.jpg" alt="Bella Pilar Temple" loading="lazy"><figcaption>Temple, medalla de plata en Premios Mezquita.</figcaption></figure>
+<figure><img src="img/bellapilar-carisma.jpg" alt="Bella Pilar Carisma" loading="lazy"><figcaption>Carisma, sauvignon blanc ecológico.</figcaption></figure>
+<figure><img src="img/bellapilar-medidor-de-momentos.jpg" alt="Contraetiqueta medidor de momentos" loading="lazy"><figcaption>El “medidor de momentos” de la contraetiqueta.</figcaption></figure>
+<figure><img src="img/bellapilar-furgoneta.jpg" alt="Vehículo de reparto rotulado" loading="lazy"><figcaption>Reparto propio con vehículo rotulado.</figcaption></figure>
+<figure class="doc"><img src="img/bellapilar-presentacion-actitud.jpg" alt="Presentación comercial" loading="lazy"><figcaption>Presentación comercial: “Bella Pilar es actitud”.</figcaption></figure>
+<figure class="doc"><img src="img/bellapilar-carta-gama.jpg" alt="Carta de la gama con notas de cata" loading="lazy"><figcaption>La gama completa con notas de cata.</figcaption></figure>
+<figure class="doc"><img src="img/bellapilar-ficha-portada.jpg" alt="Ficha comercial de Temple" loading="lazy"><figcaption>Ficha comercial de Temple.</figcaption></figure>
+<figure class="doc"><img src="img/bellapilar-ficha-temple.jpg" alt="Ficha de Temple, botellas" loading="lazy"><figcaption>Temple: crianza, joven y divertido.</figcaption></figure>
+<figure class="doc"><img src="img/bellapilar-ficha-instinto.jpg" alt="Ficha comercial de Instinto" loading="lazy"><figcaption>Ficha comercial de Instinto.</figcaption></figure>
 </div>
     </article>
 
@@ -426,10 +444,10 @@ footer p{margin-top:10px}
       <div class="case-body">
         <figure class="media"><img src="img/gomarmedia-pantalla-escaparate.jpg" width="1400" height="1050" alt="Pantalla GomarMedia en el escaparate de una tienda de Barcelona" loading="lazy"><figcaption>Una pantalla del circuito en un escaparate de primera línea, de cara a la calle.</figcaption></figure>
         <dl class="sar">
-          <dt>Situación</dt><dd><p>La publicidad exterior en Barcelona quedaba fuera del alcance del pequeño comercio por precio, contratos y producción.</p></dd>
-          <dt>Acción</dt><dd><p>Monté un medio propio con la lógica del vending: localicé los escaparates de mayor tránsito (Sagrada Família, bocas de metro, paradas de autobús), alquilé el espacio al comercio a cambio de un ingreso mensual y un anuncio gratuito, e instalé la pantalla de cara a la calle.</p><p>Diseñé cinco circuitos de diez pantallas profesionales Samsung, con tarifas desde 30 € al mes, spot cada treinta minutos y anuncio producido sin coste. Acuerdo con MediaMarkt para suministro, instalación y software con programación remota: estructura mínima y foco en venta y contenidos.</p></dd>
-          <dt>Resultado</dt><dd><p>Red de cincuenta pantallas en propiedad operativa en Barcelona.</p><p>Más de 350 anunciantes captados comercio a comercio, con recurrencia mensual; varios contrataron la red completa.</p></dd>
-        </dl>
+<dt>Situación</dt><dd><p>En Barcelona, la publicidad exterior quedaba fuera del alcance del pequeño comercio por precio, permanencia y costes de producción.</p></dd>
+<dt>Acción</dt><dd><p>Creación de un medio propio con la lógica del vending: selección de los escaparates de mayor tránsito (Sagrada Família, bocas de metro, paradas de autobús), acuerdo con cada comercio para ocupar su escaparate a cambio de un ingreso mensual y un anuncio gratuito, e instalación de la pantalla de cara a la calle.</p><p>Cinco circuitos de diez pantallas profesionales Samsung, tarifas desde 30 € al mes, spot cada treinta minutos y producción del anuncio incluida. El acuerdo con MediaMarkt para suministro, instalación y software de programación remota permitió operar con una estructura mínima y concentrar el esfuerzo en la venta y los contenidos.</p></dd>
+<dt>Resultado</dt><dd><p>Red de cincuenta pantallas en propiedad operativa en Barcelona.</p><p>Más de 350 anunciantes captados comercio a comercio, con facturación recurrente mensual; varios de ellos contrataron la red completa.</p></dd>
+</dl>
       </div>
       <div class="figs">
         <div><b>+350</b><span>anunciantes</span></div><div><b>50</b><span>pantallas</span></div><div><b>+50</b><span>escaparates negociados</span></div><div><b>5</b><span>circuitos</span></div>
@@ -437,8 +455,8 @@ footer p{margin-top:10px}
       <p class="with"><strong>Con quién:</strong> MediaMarkt, Samsung y comercios de barrio de Barcelona: autoescuelas, peluquerías, fruterías y tiendas en zonas turísticas.</p>
       <div class="gallery">
 <figure><img src="img/gomarmedia-instalacion.jpg" alt="Instalación de una pantalla GomarMedia" loading="lazy"><figcaption>Instalación en el escaparate de un comercio.</figcaption></figure>
-<figure><img src="img/gomarmedia-diptico-1.jpg" alt="Díptico comercial GomarMedia, portada" loading="lazy"><figcaption>Díptico comercial: la publicidad al alcance de todos.</figcaption></figure>
-<figure><img src="img/gomarmedia-diptico-2.jpg" alt="Díptico comercial GomarMedia, tarifas y circuitos" loading="lazy"><figcaption>Díptico comercial: tarifas desde 30 € al mes.</figcaption></figure>
+<figure class="doc"><img src="img/gomarmedia-diptico-1.jpg" alt="Díptico comercial, portada" loading="lazy"><figcaption>Díptico comercial: la publicidad al alcance de todos.</figcaption></figure>
+<figure class="doc"><img src="img/gomarmedia-diptico-2.jpg" alt="Díptico comercial, tarifas" loading="lazy"><figcaption>Díptico comercial: tarifas desde 30 € al mes.</figcaption></figure>
 </div>
     </article>
 
@@ -455,21 +473,22 @@ footer p{margin-top:10px}
         <li class="key">Distribución de bebidas</li><li>Canal Horeca</li><li>Importación y exclusividad de marca</li><li>E-commerce (PrestaShop)</li><li>Posicionamiento en Google</li><li>Sellos Confianza Online y Trusted Shops</li><li>Almacén y reparto propio</li>
       </ul>
       <div class="case-body">
-        <figure class="media"><img src="img/licoralia-catalogo.jpg" width="1400" height="660" alt="Catálogo de Licoralia para hostelería" loading="lazy"><figcaption>Catálogo de Licoralia para hostelería.</figcaption></figure>
+        <figure class="media"><img src="img/tsingtao-botella.jpg" width="460" height="460" alt="Cerveza Tsingtao" loading="lazy"><figcaption>Tsingtao: exclusividad para toda España.</figcaption></figure>
         <dl class="sar">
-          <dt>Situación</dt><dd><p>Una marca internacional sin importador exclusivo en España, y un canal de hostelería que todavía compraba por teléfono y catálogo en papel.</p></dd>
-          <dt>Acción</dt><dd><p>Negocié directamente con la cervecera Tsingtao, de propiedad estatal china, en la sede de su filial europea en París y ante una delegación oficial del país. Competían grupos de gran distribución y la exclusividad para toda España se concedió a Licoralia.</p><p>Monté la red de distribuidores en Madrid, Valencia y Andalucía, una nave de 1.500 m² diseñada con Mecalux, ERP propio y reparto a bares y restaurantes. Construí VentadeLicores.com sobre PrestaShop: la primera web de autoservicio profesional del sector, con los sellos Confianza Online y Trusted Shops y un acuerdo con Correos para hacer llegar el catálogo a todos los profesionales del canal.</p></dd>
-          <dt>Resultado</dt><dd><p>Exclusividad de Tsingtao para toda España y más de quince contenedores anuales importados de China.</p><p>811.602 € de ventas en el primer ejercicio (diez meses y medio) y ritmo de 1,6 M€ anuales al año siguiente, con 320 clientes activos.</p><p>Más de 5.000 referencias online y primera posición en Google en categorías como whisky y ron.</p></dd>
-        </dl>
+<dt>Situación</dt><dd><p>Una marca internacional, Tsingtao, sin importador exclusivo en España, y un canal de hostelería que todavía compraba por teléfono y con catálogo en papel.</p></dd>
+<dt>Acción</dt><dd><p>Negociación directa con la cervecera Tsingtao, de propiedad estatal china, en la sede de su filial europea en París y ante una delegación oficial del país: frente a grupos de gran distribución, la exclusividad para toda España se concedió a Licoralia.</p><p>Creación de la red de distribuidores en Madrid, Valencia y Andalucía, de una nave de 1.500 m² diseñada con Mecalux, de un ERP propio y de un servicio de reparto a bares y restaurantes. En paralelo, lanzamiento de VentadeLicores.com sobre PrestaShop, la primera tienda de autoservicio profesional del sector, con los sellos Confianza Online y Trusted Shops, la marca propia Licoret y un acuerdo con Correos para hacer llegar el catálogo a todos los profesionales del canal.</p></dd>
+<dt>Resultado</dt><dd><p>Exclusividad de Tsingtao para toda España, con más de quince contenedores anuales importados de China.</p><p>811.602 € de ventas en el primer ejercicio (diez meses y medio), ritmo de 1,6 M€ anuales al año siguiente y 320 clientes activos.</p><p>Más de 5.000 referencias online y primera posición en Google en categorías como whisky y ron.</p></dd>
+</dl>
       </div>
       <div class="figs">
         <div><b>+15</b><span>contenedores al año</span></div><div><b>1,6 M€</b><span>ritmo anual de ventas</span></div><div><b>+5.000</b><span>referencias online</span></div><div><b>320</b><span>clientes activos</span></div>
       </div>
       <p class="with"><strong>Con quién:</strong> Tsingtao, Telefónica, Mecalux, Correos, SEUR, MRW, Confianza Online, Trusted Shops y distribuidores en Madrid, Valencia y Andalucía.</p>
       <div class="gallery">
-        <figure><img src="img/licoralia-sello-ventadelicores.jpg" alt="Sello de VentadeLicores.com" loading="lazy"><figcaption>VentadeLicores.com, la tienda online de Licoralia.</figcaption></figure>
-<figure><img src="img/tsingtao-botella.jpg" alt="Cerveza Tsingtao" loading="lazy"><figcaption>Tsingtao, distribuidor exclusivo para España. Foto: Radosław Drożdżewski, Wikimedia Commons, CC BY-SA 4.0.</figcaption></figure>
-      </div>
+<figure class="doc"><img src="img/licoralia-catalogo.jpg" alt="Catálogo de Licoralia para hostelería" loading="lazy"><figcaption>Catálogo de Licoralia para hostelería.</figcaption></figure>
+<figure class="doc"><img src="img/licoralia-sello-ventadelicores.jpg" alt="Sello de VentadeLicores.com" loading="lazy"><figcaption>VentadeLicores.com, la tienda online de Licoralia.</figcaption></figure>
+<figure class="doc"><img src="img/licoralia-marca-licoret.jpg" alt="Marca Licoret, liqueurs and wines" loading="lazy"><figcaption>Licoret, la marca propia de licores y vinos.</figcaption></figure>
+</div>
     </article>
 
     <!-- OPENSERVICE -->
@@ -487,24 +506,24 @@ footer p{margin-top:10px}
       <div class="case-body">
         <figure class="media"><img src="img/openservice-openstop-fgc-tren.jpg" width="800" height="518" alt="Máquina OpenStop en el andén de una estación de Ferrocarrils de la Generalitat" loading="lazy"><figcaption>OpenStop en una estación de Ferrocarrils de la Generalitat: más de cincuenta estaciones en la red.</figcaption></figure>
         <dl class="sar">
-          <dt>Situación</dt><dd><p>El vending público en España estaba en manos de operadores tradicionales de café y snacks: sin marca, sin datos y sin producto saludable.</p></dd>
-          <dt>Acción</dt><dd><p>Creé Open Service Europe con alianza tecnológica con Jofemar, tercer fabricante mundial de máquinas expendedoras, y cuatro unidades con imagen, color y surtido propios: OpenShop (centros comerciales, hoteles, parques temáticos), OpenStop (aeropuertos, metro, Cercanías), OpenLife (gimnasios y balnearios) y OpenCity (espacio público municipal, con el 0,7 % de las ventas a fines sociales).</p><p>Implanté un ERP a medida con UNIT4 (200.000 € y nueve meses): telemetría de cada máquina, rutas automatizadas y foto de cada reposición en el CRM. Negocié el surtido con primeras marcas de bebidas, snacks y lácteos y desarrollé el modelo de franquicia con manual propio.</p></dd>
-          <dt>Resultado</dt><dd><p>Red de 3.000 máquinas en península y Baleares con logística propia: camiones nocturnos a Madrid y barco a Mallorca e Ibiza.</p><p>Clientes en centros comerciales, Ferrocarrils de la Generalitat (más de cincuenta estaciones), Renfe, hoteles, Parques Reunidos y ayuntamientos, entre otros. Concurso público adjudicado en Castellar del Vallès para instalar puntos de venta automáticos en espacio municipal (Open City).</p><p>Equipo de hasta cincuenta personas entre oficina, repartidores y franquiciados.</p></dd>
-        </dl>
+<dt>Situación</dt><dd><p>El vending público en España estaba en manos de operadores tradicionales de café y snacks: sin marca, sin datos y sin oferta saludable.</p></dd>
+<dt>Acción</dt><dd><p>Creación de Open Service Europe con Jofemar, tercer fabricante mundial de máquinas expendedoras, como socio tecnológico, y de cuatro unidades con imagen, color y surtido propios: OpenShop (centros comerciales, hoteles y parques temáticos), OpenStop (aeropuertos, metro y Cercanías), OpenLife (gimnasios y balnearios) y OpenCity (espacio público municipal, con el 0,7 % de las ventas destinado a fines sociales).</p><p>Implantación de un ERP a medida con UNIT4 (200.000 € y nueve meses) con telemetría en cada máquina, rutas automatizadas y fotografía de cada reposición. Negociación del surtido con primeras marcas de bebidas, snacks y lácteos, desarrollo del modelo de franquicia con manual propio, y diseño del kiosco Open City, con marcado CE, y de la cubierta inclinada de seguridad que después adoptó el sector.</p></dd>
+<dt>Resultado</dt><dd><p>Red de 3.000 máquinas en península y Baleares con logística propia: camiones nocturnos a Madrid y barco a Mallorca e Ibiza.</p><p>Clientes como Ferrocarrils de la Generalitat (más de cincuenta estaciones), Renfe, Parques Reunidos, centros comerciales, hoteles y ayuntamientos, entre otros; concurso público adjudicado en Castellar del Vallès para instalar puntos de venta automáticos en espacio municipal.</p><p>Equipo de hasta cincuenta personas entre oficina, repartidores y franquiciados.</p></dd>
+</dl>
       </div>
       <div class="figs">
         <div><b>3.000</b><span>máquinas</span></div><div><b>7 M€</b><span>facturación anual</span></div><div><b>200 k€</b><span>ERP a medida</span></div><div><b>+50</b><span>personas en el equipo</span></div>
       </div>
       <p class="with"><strong>Con quién:</strong> Jofemar, UNIT4, Telefónica, Mecalux, Coca-Cola (Cobega), Nestlé, Kellogg's, Pascual, Cacaolat, Solán de Cabras, Cuétara, Bicentury, Durex y Nivea, entre otros; clientes como Renfe, Ferrocarrils de la Generalitat, Parques Reunidos, centros comerciales, hoteles y ayuntamientos.</p>
       <div class="gallery">
-<figure><img src="img/opencity-castellar-parque-principal.jpg" alt="Kiosco Open City en un parque de Castellar del Vallès" loading="lazy"><figcaption>Open City en espacio público, Castellar del Vallès.</figcaption></figure>
-<figure><img src="img/openservice-heron-city.jpg" alt="OpenShop en el centro comercial Heron City de Barcelona" loading="lazy"><figcaption>OpenShop en el centro comercial Heron City, Barcelona.</figcaption></figure>
-<figure><img src="img/openservice-openshop-centro-comercial.jpg" alt="Máquina OpenShop en un centro comercial" loading="lazy"><figcaption>OpenShop en un centro comercial.</figcaption></figure>
+<figure><img src="img/openservice-openstop-anden.jpg" alt="OpenStop en un andén de estación" loading="lazy"><figcaption>OpenStop en el andén: la máquina de estaciones y aeropuertos.</figcaption></figure>
+<figure><img src="img/opencity-castellar-parque-principal.jpg" alt="Kiosco Open City en Castellar del Vallès" loading="lazy"><figcaption>Open City en espacio público, Castellar del Vallès.</figcaption></figure>
+<figure><img src="img/openservice-heron-city.jpg" alt="OpenShop en Heron City" loading="lazy"><figcaption>OpenShop en el centro comercial Heron City, Barcelona.</figcaption></figure>
+<figure><img src="img/openservice-openshop-centro-comercial.jpg" alt="OpenShop en el centro comercial Glòries" loading="lazy"><figcaption>OpenShop en el centro comercial Glòries, Barcelona.</figcaption></figure>
 <figure><img src="img/opencity-calle.jpg" alt="Open City en la calle" loading="lazy"><figcaption>Open City: mobiliario urbano fabricado a medida.</figcaption></figure>
-<figure><img src="img/openservice-catalogo-portada.jpg" alt="Portada del catálogo corporativo Openservice 2009" loading="lazy"><figcaption>Catálogo corporativo 2009.</figcaption></figure>
-<figure><img src="img/openservice-catalogo-asi-pensamos.jpg" alt="Página "Así pensamos" del catálogo Openservice" loading="lazy"><figcaption>"Así pensamos": el espíritu de la marca.</figcaption></figure>
-<figure><img src="img/openservice-catalogo-unidades.jpg" alt="Unidades OpenStop, OpenLife y OpenShop" loading="lazy"><figcaption>Tres unidades, tres nichos: OpenStop, OpenLife y OpenShop.</figcaption></figure>
-<figure><img src="img/openservice-catalogo-openstop.jpg" alt="Ficha técnica de la máquina OpenStop" loading="lazy"><figcaption>OpenStop: la máquina de estaciones y aeropuertos.</figcaption></figure>
+<figure class="doc"><img src="img/openservice-catalogo-asi-pensamos.jpg" alt="Catálogo 2009, Así pensamos" loading="lazy"><figcaption>Catálogo 2009: “Así pensamos”, el espíritu de la marca.</figcaption></figure>
+<figure class="doc"><img src="img/openservice-catalogo-unidades.jpg" alt="Unidades OpenStop, OpenLife y OpenShop" loading="lazy"><figcaption>Tres unidades, tres nichos: OpenStop, OpenLife y OpenShop.</figcaption></figure>
+<figure class="doc"><img src="img/openservice-catalogo-openstop.jpg" alt="Ficha de la máquina OpenStop" loading="lazy"><figcaption>Ficha técnica de OpenStop.</figcaption></figure>
 </div>
     </article>
 
@@ -521,23 +540,23 @@ footer p{margin-top:10px}
         <li class="key">Distribución farmacéutica</li><li>Canal farmacia</li><li>Marketing e identidad corporativa</li><li>Lanzamiento de producto</li><li>Logística de reparto urgente</li><li>Publicidad en punto de venta</li>
       </ul>
       <div class="case-body">
-        <figure class="media"><img src="img/sedifa-newfarma-dispensador.jpg" width="1400" height="1050" alt="Dispensador automático NewFarma instalado en una farmacia" loading="lazy"><figcaption>NewFarma, el primer dispensador automático de EFP de España, en una farmacia.</figcaption></figure>
+        <figure class="media"><img src="img/sedifa-almacen-estanterias.jpg" width="651" height="1000" alt="Preparación de pedidos en cubetas Sedifa" loading="lazy"><figcaption>Preparación de pedidos en cubetas Sedifa.</figcaption></figure>
         <dl class="sar">
-          <dt>Situación</dt><dd><p>Una distribuidora con más de 50 millones de euros de ventas, imagen anticuada y un canal, la farmacia, que empezaba a exigir servicio y rapidez.</p></dd>
-          <dt>Acción</dt><dd><p>Dirigí la renovación completa de la identidad corporativa en 2004: logotipo, flota, facturas, papelería y punto de venta.</p><p>Lancé a nivel nacional NewFarma, el primer dispensador automático de medicamentos publicitarios (EFP) de España, con pantalla táctil y prospecto en más de doce idiomas. Puse en marcha Farmaexpress, entrega urgente a farmacias en treinta minutos sobre una flota de más de veinte furgonetas y camiones, y un circuito de publicidad en pantalla en farmacias financiado por los laboratorios.</p></dd>
-          <dt>Resultado</dt><dd><p>Una marca renovada de la furgoneta a la factura y una distribuidora que pasó de vender producto a vender servicio.</p><p>Más de treinta dispensadores NewFarma instalados en costas turísticas: una categoría nueva que abrió la puerta a la siguiente etapa, el vending.</p></dd>
-        </dl>
+<dt>Situación</dt><dd><p>Una distribuidora farmacéutica con más de 50 millones de euros de ventas, una imagen anticuada y un canal, la farmacia, que empezaba a exigir servicio y rapidez.</p></dd>
+<dt>Acción</dt><dd><p>Dirección de la renovación completa de la identidad corporativa en 2004, del logotipo a la flota, las facturas y el punto de venta.</p><p>Lanzamiento nacional de NewFarma, el primer dispensador automático de medicamentos publicitarios (EFP) de España, con pantalla táctil y prospecto en más de doce idiomas. Puesta en marcha de Farmaexpress, la entrega urgente a farmacias en treinta minutos sobre una flota de más de veinte furgonetas y camiones, y de un circuito de publicidad en pantalla en farmacias financiado por los laboratorios.</p></dd>
+<dt>Resultado</dt><dd><p>Una marca renovada de la furgoneta a la factura y una distribuidora que pasó de vender producto a vender servicio.</p><p>Más de treinta dispensadores NewFarma instalados en costas turísticas: una categoría nueva que abrió la puerta a la siguiente etapa, el vending.</p></dd>
+</dl>
       </div>
       <div class="figs">
         <div><b>+50 M€</b><span>ventas del grupo</span></div><div><b>+30</b><span>dispensadores NewFarma</span></div><div><b>+20</b><span>furgonetas y camiones</span></div><div><b>30 min</b><span>entrega Farmaexpress</span></div>
       </div>
       <p class="with"><strong>Con quién:</strong> más de seiscientas farmacias de Cataluña, laboratorios y fabricantes del canal farmacia, agencia de publicidad y proveedores de identidad corporativa.</p>
       <div class="gallery">
-<figure><img src="img/sedifa-cambio-imagen-antes-despues-2004.jpg" alt="Logotipo de Sedifa antes y después del cambio de imagen de 2004" loading="lazy"><figcaption>Antes y después: de la cruz roja al globo verde. Enero de 2004.</figcaption></figure>
+<figure><img src="img/sedifa-newfarma-dispensador.jpg" alt="Dispensador NewFarma en una farmacia" loading="lazy"><figcaption>NewFarma, el primer dispensador automático de EFP de España.</figcaption></figure>
+<figure class="doc"><img src="img/sedifa-cambio-imagen-antes-despues-2004.jpg" alt="Logotipo de Sedifa antes y después de 2004" loading="lazy"><figcaption>Antes y después: de la cruz roja al globo verde. Enero de 2004.</figcaption></figure>
 <figure><img src="img/sedifa-furgonetas.jpg" alt="Flota de reparto de Sedifa" loading="lazy"><figcaption>La flota de reparto delante de la nave.</figcaption></figure>
-<figure><img src="img/sedifa-almacen-nave.jpg" alt="Vista general del almacén de Sedifa" loading="lazy"><figcaption>El almacén: picking y expedición.</figcaption></figure>
-<figure><img src="img/sedifa-almacen-estanterias.jpg" alt="Estanterías y cubetas Sedifa en el almacén" loading="lazy"><figcaption>Preparación de pedidos en cubetas Sedifa.</figcaption></figure>
-<figure><img src="img/sedifa-picking-almacen.jpg" alt="Picking en el almacén de Sedifa" loading="lazy"><figcaption>Picking en el almacén.</figcaption></figure>
+<figure><img src="img/sedifa-almacen-nave.jpg" alt="Almacén de Sedifa" loading="lazy"><figcaption>El almacén: picking y expedición.</figcaption></figure>
+<figure><img src="img/sedifa-picking-almacen.jpg" alt="Picking en el almacén" loading="lazy"><figcaption>Picking en el almacén.</figcaption></figure>
 </div>
     </article>
   </div>
@@ -616,12 +635,12 @@ footer p{margin-top:10px}
         <li><strong>Control:</strong> cierre contable, tesorería, cuadro de mando y ERP con inversión de 200 k€ en Openservice.</li>
       </ul>
     </div>
-    <div class="years">
-      <div><span>Comercial y negociación</span><b>24 años</b></div>
-      <div><span>Marketing y marca</span><b>24 años</b></div>
-      <div><span>Tecnología, datos e IA</span><b>20 años</b></div>
-      <div><span>Operaciones y logística</span><b>19 años</b></div>
-      <div><span>Finanzas y control</span><b>19 años</b></div>
+    <div class="years rv">
+      <div><b class="yr">24</b><span>años en comercial y negociación</span><i style="--w:92%"></i></div>
+      <div><b class="yr">24</b><span>años en marketing y marca</span><i style="--w:92%"></i></div>
+      <div><b class="yr">20</b><span>años en tecnología, datos e IA</span><i style="--w:77%"></i></div>
+      <div><b class="yr">19</b><span>años en operaciones y logística</span><i style="--w:73%"></i></div>
+      <div><b class="yr">19</b><span>años en finanzas y control</span><i style="--w:73%"></i></div>
     </div>
     <p class="years-note">Años con responsabilidad directa por función, calculados sobre cargos y fechas (2000–2026), no sobre autoevaluación.</p>
   </div>
@@ -708,7 +727,21 @@ footer p{margin-top:10px}
         <p>En paralelo, el Máster de Trading Algorítmico de Traders Business School ha añadido el dominio de los mercados financieros y la programación de sistemas automáticos: la misma disciplina de datos, control y trazabilidad de siempre, aplicada ahora con herramientas que en 2007 no existían. Experiencia real de negocio y dominio práctico de la IA: la combinación que buscan las empresas que quieren ganar eficiencia sin perder criterio.</p>
       </div>
       <ul class="tools">
-        <li>Claude</li><li>ChatGPT</li><li>Gemini</li><li>Grok</li><li>Make</li><li>Slack</li><li>Microsoft 365 · Excel</li><li>Google Workspace</li><li>Notion</li><li>ERP UNIT4</li><li>PrestaShop</li><li>MetaTrader 5</li>
+        <li><em style="background:#c96442">Cl</em>Claude<small>agentes y análisis</small></li>
+        <li><em style="background:#10a37f">GPT</em>ChatGPT<small>redacción y datos</small></li>
+        <li><em style="background:#4285f4">Ge</em>Gemini<small>Google Workspace</small></li>
+        <li><em style="background:#1b2330">Gk</em>Grok<small>investigación</small></li>
+        <li><em style="background:#6d00cc">Mk</em>Make<small>automatización</small></li>
+        <li><em style="background:#ff4f00">Zp</em>Zapier<small>integraciones</small></li>
+        <li><em style="background:#4a154b">Sl</em>Slack<small>coordinación</small></li>
+        <li><em style="background:#217346">Xl</em>Excel<small>modelos y cuadros de mando</small></li>
+        <li><em style="background:#0f9d58">Gw</em>Google Workspace<small>Drive, Sheets, Docs</small></li>
+        <li><em style="background:#000">No</em>Notion<small>documentación</small></li>
+        <li><em style="background:#00c4cc">Cv</em>Canva<small>diseño y presentaciones</small></li>
+        <li><em style="background:#ff7a59">Hs</em>HubSpot<small>CRM</small></li>
+        <li><em style="background:#163a63">GH</em>GitHub<small>publicación web</small></li>
+        <li><em style="background:#df0067">PS</em>PrestaShop<small>e-commerce</small></li>
+        <li><em style="background:#0b5fa5">U4</em>ERP UNIT4<small>implantación a medida</small></li>
       </ul>
     </div>
   </div>
@@ -821,7 +854,7 @@ footer p{margin-top:10px}
     function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);var e=1-Math.pow(1-p,3);el.textContent=pre+fmt(Math.round(target*e))+suf;if(p<1)requestAnimationFrame(step)}
     el.textContent=pre+'0'+suf; requestAnimationFrame(step);
   }
-  var nums=document.querySelectorAll('.kpi b, .figs b');
+  var nums=document.querySelectorAll('.kpi b, .figs b, .years b');
   if('IntersectionObserver' in window){
     var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){animateNum(e.target);io2.unobserve(e.target)}})},{threshold:.5});
     nums.forEach(function(n){io2.observe(n)});
