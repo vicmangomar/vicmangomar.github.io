@@ -504,3 +504,19 @@ a.aw:hover{border-color:var(--navy);transform:translateY(-2px)}
 .aw .medal{flex:none;width:52px;height:60px;display:block;filter:drop-shadow(0 4px 8px rgba(13,27,46,.18))}
 .aw-t{display:block}
 .aw-t b{display:block}
+
+/* presentación temprana de los agentes */
+.crew{margin-top:26px;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+.crew-t{font-size:15px;color:#334155;max-width:52ch}
+.crew-t b{color:var(--ink)}
+.crew-t a{color:var(--navy);font-weight:600;text-decoration:none;white-space:nowrap}
+.crew-t a:hover{text-decoration:underline}
+.crew-l{display:flex;gap:6px}
+.crew-a{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;width:66px;text-align:center}
+.crew-a img{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:50% 0;background:color-mix(in srgb,var(--c) 20%,#fff);border:2px solid #fff;box-shadow:0 0 0 1.5px color-mix(in srgb,var(--c) 60%,#fff);transition:transform .2s}
+.crew-a:hover img{transform:translateY(-3px)}
+.crew-a span{font:700 12px var(--f-display);color:var(--ink)}
+.crew-a span b{color:var(--c)}
+.crew-a small{font-size:10.5px;color:var(--muted);line-height:1}
+@media (max-width:900px){.crew{grid-template-columns:1fr}.crew-l{flex-wrap:wrap}}
+.peek .say .tag{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
